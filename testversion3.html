@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Temperaturvergleich Berlin – Bild-Slider</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 1em;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 1em;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      aspect-ratio: 1280 / 594;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+
+    .top {
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 0.1s ease-out;
+    }
+
+    .slider-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      appearance: none;
+      height: 10px;
+      background: #444;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 4px rgba(0,0,0,0.6);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 4px rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Temperaturvergleich Berlin Tiergarten und Alexanderplatz (Wärmebild ↔ Satellitenbild)</h2>
+
+  <div class="container">
+    <img src="Folie1fertig.PNG" class="image bottom" alt="Tag-Bild">
+    <img src="Folie2fertig.PNG" class="image top" id="topImage" alt="Wärmebild">
+
+    <div class="slider-container">
+      <input type="range" min="0" max="100" value="0" id="slider">
+    </div>
+  </div>
+
+  <script>
+    const slider = document.getElementById('slider');
+    const topImage = document.getElementById('topImage');
+
+    slider.addEventListener('input', () => {
+      const value = slider.value;
+      topImage.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+    });
+  </script>
+
+</body>
+</html>
